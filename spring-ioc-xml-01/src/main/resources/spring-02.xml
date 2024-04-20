@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- 引用和背引用的组件 必须全部在ioc容器中-->
+    <!--1. 单个构造参数注入 -->
+    <!-- 步骤1：将它们都存放在ioc容器[ioc] -->
+    <bean id="userDao" class="com.enzo.ioc_02.UserDao"/>
+
+    <!--
+        springioc容器是一个高级容器，内部有缓存动作
+        1.先创建对象[ioc]
+        2.在进行属性赋值[di]
+    -->
+    <bean id="userService" class="com.enzo.ioc_02.UserService">
+        <!--构造参数传值 di的配置
+            constructor-arg     构造参数传值的di配置
+            value   =       直接属性值
+            ref     =       引用其他的bean   beanId值
+            其二选一
+        -->
+        <constructor-arg ref="userDao"/>
+    </bean>
+
+    <!-- 2.多个构造参数传入-->
+    <bean id="userService2" class="com.enzo.ioc_02.UserService">
+        <!--按照参数的name赋值，不用考虑顺序-->
+        <constructor-arg name="name" value="胡歌"/>
+        <constructor-arg name="age" value="30"/>
+        <constructor-arg name="userDao" ref="userDao"/>
+    </bean>
+
+
+    <!-- 3.触发setter方法进行注入-->
+    <bean id="movieFinder" class="com.enzo.ioc_02.MovieFinder"/>
+
+    <bean id="simpleMovieLister" class="com.enzo.ioc_02.SimpleMovieLister">
+        <!--
+            name        属性名 调用set方法的名
+            value | ref 二选一 value=“直接属性名” ref=“其他bean的Id”
+        -->
+        <property name="movieName" value="胡歌"/>
+        <property name="movieFinder" ref="movieFinder"/>
+    </bean>
+
+</beans>

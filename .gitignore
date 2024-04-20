@@ -1,0 +1,8 @@
+# Project exclude paths
+/spring-ioc-annotation-03/target/
+/spring-ioc-annotation-practice-04/target/
+/spring-ioc-java-05/target/
+/spring-ioc-xml-01/target/
+/spring-ioc-xml-practice-02/target/
+/spring-java-practice-06/target/
+/spring-test-annotation-07/target/
